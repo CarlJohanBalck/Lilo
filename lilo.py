@@ -78,7 +78,7 @@ def LiloStatusLight():
 				sense.set_rotation(180)
 
 				number = 0
-
+				
 				if(delta.days == 1):
 					number = g1
 				elif (delta.days == 2):
@@ -95,7 +95,6 @@ def LiloStatusLight():
 			except AttributeError:
 				time.sleep(2)
 				continue
-
 	else: 
 		while True:
 			sense.stick.direction_middle = received_medicine
