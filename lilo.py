@@ -13,126 +13,21 @@ import os
 from decimal import *
 from threading import Thread
 
-
 from config import (
 	IP_ADDRESS,
-	PORT
+	PORT,
+	smiley_face,
+	g1,
+	g2,
+	g3,
+	g4,
+	r1,
+	r2,
+	r3,
+	r4
 )
 
 hostname = socket.gethostname()
-isOnWalk = False
-g = (0, 255, 0)
-
-e = (0, 0, 0)
-y = (0, 0, 0)
-
-b = (0,0,255)
-
-r = (255,0,0)
-blue = [
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b,
-	b, b, b, b, b, b, b, b
-]
-smiley_face = [
-   y, y, y, y, y, y, y, y,
-   y, y, y, y, y, y, y, y,
-   y, b, b, y, y, b, b, y,
-   y, b, b, y, y, b, b, y,
-   y, y, y, y, y, y, y, y,
-   y, b, b, y, y, b, b, y,
-   y, y, y, b, b, y, y, y,
-   y, y, y, y, y, y, y, y
-]
-
-green_one = [
-	e, e, e, g, g, e, e, e,
-	e, g, g, g, g, e, e, e,
-	e, g, g, g, g, e, e, e,
-	e, e, e, g, g, e, e, e,
-	e, e, e, g, g, e, e, e,
-	e, e, e, g, g, e, e, e,
-	e, e, e, g, g, e, e, e,
-	e, e, e, g, g, e, e, e
-]
-green_two = [
-	e, g, g, g, g, g, e, e,
-	e, g, g, g, g, g, e, e,
-	e, e, e, g, g, g, e, e,
-	e, e, e, g, g, g, e, e,
-	e, g, g, g, g, e, e, e,
-	e, g, g, e, e, e, e, e,
-	e, g, g, g, g, g, e, e,
-	e, g, g, g, g, g, e, e
-]
-green_three = [
-	e, g, g, g, g, g, e, e,
-	e, g, g, g, g, g, e, e,
-	e, e, e, e, g, g, e, e,
-	e, g, g, g, g, g, e, e,
-	e, g, g, g, g, g, e, e,
-	e, e, e, e, g, g, e, e,
-	e, g, g, g, g, g, e, e,
-	e, g, g, g, g, g, e, e
-]
-green_four = [
-	e, g, g, e, e, g, g, e,
-	e, g, g, e, e, g, g, e,
-	e, g, g, g, g, g, g, e,
-	e, g, g, g, g, g, g, e,
-	e, e, e, e, e, g, g, e,
-	e, e, e, e, e, g, g, e,
-	e, e, e, e, e, g, g, e,
-	e, e, e, e, e, g, g, e
-]
-
-red_one = [
-	e, e, e, r, r, e, e, e,
-	e, r, r, r, r, e, e, e,
-	e, r, r, r, r, e, e, e,
-	e, e, e, r, r, e, e, e,
-	e, e, e, r, r, e, e, e,
-	e, e, e, r, r, e, e, e,
-	e, e, e, r, r, e, e, e,
-	e, e, e, r, r, e, e, e
-]
-red_two = [
-	e, r, r, r, r, r, e, e,
-	e, r, r, r, r, r, e, e,
-	e, e, e, r, r, r, e, e,
-	e, e, e, r, r, r, e, e,
-	e, r, r, r, r, e, e, e,
-	e, r, r, e, e, e, e, e,
-	e, r, r, r, r, r, e, e,
-	e, r, r, r, r, r, e, e
-]
-red_three = [
-	e, r, r, r, r, r, e, e,
-	e, r, r, r, r, r, e, e,
-	e, e, e, e, r, r, e, e,
-	e, r, r, r, r, r, e, e,
-	e, r, r, r, r, r, e, e,
-	e, e, e, e, r, r, e, e,
-	e, r, r, r, r, r, e, e,
-	e, r, r, r, r, r, e, e
-]
-red_four = [
-	e, r, r, e, e, r, r, e,
-	e, r, r, e, e, r, r, e,
-	e, r, r, r, r, r, r, e,
-	e, r, r, r, r, r, r, e,
-	e, e, e, e, e, r, r, e,
-	e, e, e, e, e, r, r, e,
-	e, e, e, e, e, r, r, e,
-	e, e, e, e, e, r, r, e
-]
-
-
 ip_address = IP_ADDRESS
 app = Flask(__name__)
 CORS(app)
@@ -156,7 +51,6 @@ def getEverySecondDateInFuture(date):
 
 def received_medicine(event):
 	if event.action == 'pressed':
-		
 		LiloFick()
 		
 def LiloStatusLight():
@@ -164,7 +58,7 @@ def LiloStatusLight():
 	config.read('lastDate.ini')
 	now = datetime.now() # current date and time	
 	date_time = now.strftime("%d/%m/%Y")
-	last_date = config['DEFAULT']['LAST_DATE']
+	last_date = config['DEFAULT']['last_date']
 	last_date_parsed = last_date.split(" ")[1]
 	futureMedicationDates = getEverySecondDateInFuture(last_date_parsed)
 
@@ -174,7 +68,7 @@ def LiloStatusLight():
 			try:
 				config = configparser.ConfigParser()
 				config.read('lastDate.ini')
-				lastDate = config['DEFAULT']['LAST_DATE'].split(' ', 1)[1]
+				lastDate = config['DEFAULT']['last_date'].split(' ', 1)[1]
 				now = datetime.now() # current date and time	
 				date_time = now.strftime("%d/%m/%Y")	
 				date_format = "%d/%m/%Y"
@@ -186,20 +80,19 @@ def LiloStatusLight():
 				number = 0
 
 				if(delta.days == 1):
-					number = green_one
+					number = g1
 				elif (delta.days == 2):
-					number = green_two
+					number = g2
 				elif (delta.days == 3):
-					number = green_three
+					number = g3
 				elif (delta.days == 4):
-					number = green_four
+					number = g4
 				elif(delta.days == 0):
 					number = smiley_face
 
 				sense.set_pixels(number)
 
 			except AttributeError:
-				print("ATTRIBUTE ERROR")
 				time.sleep(2)
 				continue
 
@@ -209,7 +102,7 @@ def LiloStatusLight():
 			try:
 				config = configparser.ConfigParser()
 				config.read('lastDate.ini')
-				lastDate = config['DEFAULT']['LAST_DATE'].split(' ', 1)[1]
+				lastDate = config['DEFAULT']['last_date'].split(' ', 1)[1]
 				now = datetime.now() # current date and time	
 				date_time = now.strftime("%d/%m/%Y")	
 				date_format = "%d/%m/%Y"
@@ -219,13 +112,13 @@ def LiloStatusLight():
 				sense.set_rotation(180)
 				number = 0
 				if(delta.days == 1):
-					number = red_one
+					number = r1
 				elif (delta.days == 2):
-					number = red_two
+					number = r2
 				elif (delta.days == 3):
-					number = red_three
+					number = r3
 				elif (delta.days == 4):
-					number = red_four
+					number = r4
 				elif(delta.days == 0):
 					number = smiley_face
 
@@ -244,31 +137,11 @@ def LiloFick():
 	my_date = date.today()
 	sense = SenseHat()
 	weekday = calendar.day_name[my_date.weekday()]
-	if(weekday == "Sunday"):
-		veckodag = "Söndag"
-	if(weekday == "Monday"):
-		veckodag = "Måndag"
-	if(weekday == "Tuesday"):
-		veckodag = "Tisdag"
-	if(weekday == "Wednesday"):
-		veckodag = "Onsdag"
-	if(weekday == "Thursday"):
-		veckodag = "Torsdag"
-	if(weekday == "Friday"):
-		veckodag = "Fredag"
-	if(weekday == "Saturday"):
-		veckodag = "Lördag"
-	
 	config.read('lastDate.ini')
-	match = veckodag + " " + date_time
-	if (match == config['DEFAULT']['LAST_DATE']):
-		return "Jag har redan skrivit upp att Lilo fick medicin idag " + config['DEFAULT']['LAST_DATE']
-	else: 
-		config['DEFAULT']['LAST_DATE'] = veckodag + " " + date_time
-		with open('lastDate.ini', 'w') as configfile:
-			config.write(configfile)
-		sense.set_pixels(smiley_face)
-		return "Då noterar jag att Lilo fick medicin " + veckodag + " den " + date_time
+	config['DEFAULT']['last_date'] = weekday + " " + date_time
+	with open('lastDate.ini', 'w') as configfile:
+		config.write(configfile)
+	sense.set_pixels(smiley_face)
 
 if __name__ == '__main__':
 	thread = Thread(target = LiloStatusLight)
