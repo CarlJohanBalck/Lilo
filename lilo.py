@@ -2,8 +2,6 @@ import os
 import time
 from datetime import datetime, date, timedelta
 from tkinter import E
-from flask import Flask, request
-from flask_cors import CORS
 import socket
 import time
 import configparser
@@ -12,6 +10,8 @@ from sense_hat import SenseHat
 import os
 from decimal import *
 from threading import Thread
+from flask import Flask, request
+from flask_cors import CORS
 
 from config import (
 	IP_ADDRESS,
@@ -128,7 +128,6 @@ def LiloStatusLight():
 				continue
 	
 	
-@app.route('/Siri/LiloFick', methods=['POST'])
 def LiloFick():
 	now = datetime.now() # current date and time	
 	date_time = now.strftime("%d/%m/%Y")	
@@ -146,7 +145,3 @@ if __name__ == '__main__':
 	thread = Thread(target = LiloStatusLight)
 	thread.start()
 	app.run(debug=True, host=ip_address, port=PORT, use_reloader=False)
-	
-
-
-	
