@@ -28,18 +28,22 @@ def GetStatus():
     b = datetime.strptime(lastDate, date_format)
     delta = a - b
     response = []
+    print("LAST DATE---", lastDate)
 
     if delta.days == 0:
         response.append(False)
         response.append(delta.days)
+        response.append(lastDate)
         return json.dumps(response)
     elif (delta.days % 2) == 0:
         response.append(True)
         response.append(delta.days)
+        response.append(lastDate)
         return json.dumps(response)
     else:  
         response.append(False)
         response.append(delta.days)
+        response.append(lastDate)
         return json.dumps(response)
 
 if __name__ == '__main__':
