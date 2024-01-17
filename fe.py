@@ -28,7 +28,6 @@ def GetStatus():
     b = datetime.strptime(lastDate, date_format)
     delta = a - b
     response = []
-    print("LAST DATE---", lastDate)
 
     if delta.days == 0:
         response.append(False)
