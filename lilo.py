@@ -37,7 +37,6 @@ print(' IP address of Pi: ' + ip_address)
 
 sense = SenseHat()
 
-
 def getEverySecondDateInFuture(date):
 	parsedDate = datetime.strptime(date, "%d/%m/%Y").date()
 	dateList = []
