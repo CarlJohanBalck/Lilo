@@ -10,6 +10,6 @@ class TestCalculateDateDiff(unittest.TestCase):
 
         # Assert that the result matches the expected difference
         self.assertIn(result, expected_result)
-
+            
 if __name__ == '__main__':
     unittest.main()

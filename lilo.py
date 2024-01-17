@@ -88,9 +88,7 @@ def LiloStatusLight():
 					number = g4
 				elif(delta.days == 0):
 					number = smiley_face
-
 				sense.set_pixels(number)
-
 			except AttributeError:
 				time.sleep(2)
 				continue
