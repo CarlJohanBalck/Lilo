@@ -2,6 +2,7 @@ import flask_cors
 from flask import Flask, request
 import configparser
 from flask_cors import CORS
+from lilo import LiloFick
 
 from datetime import datetime, date, timedelta
 import json
@@ -44,6 +45,13 @@ def GetStatus():
         response.append(delta.days)
         response.append(lastDate)
         return json.dumps(response)
+    
+@app.route('/LiloFick', methods=['POST'])
+def LiloGot():
+     LiloFick()
+     response = ["200"]
+     return json.dumps(response)
+
 
 if __name__ == '__main__':
 	app.run(debug=True, host="0.0.0.0", port=PORT_FE, use_reloader=True)
