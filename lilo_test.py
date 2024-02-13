@@ -1,5 +1,5 @@
 import unittest
-from fe import GetStatus
+from Lilo.be import GetStatus
 
 class TestCalculateDateDiff(unittest.TestCase):
     
