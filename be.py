@@ -10,7 +10,7 @@ import json
 
 from config import (
     IP_ADDRESS,   
-	PORT_FE,
+	PORT_BE,
 	
 )
 ip_address = IP_ADDRESS
@@ -54,5 +54,5 @@ def LiloGot():
 
 
 if __name__ == '__main__':
-	app.run(debug=True, host="0.0.0.0", port=PORT_FE, use_reloader=True)
+	app.run(debug=True, host="0.0.0.0", port=PORT_BE, use_reloader=True)
 	

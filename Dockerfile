@@ -13,4 +13,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Set the command to run when the container starts
-CMD ["python3", "fe.py"]
+CMD ["python3", "be.py"]
