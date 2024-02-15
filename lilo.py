@@ -143,7 +143,7 @@ def LiloFick():
 
 
 if __name__ == '__main__':
-	subprocess.call(['sh', './home/pi/code/scripts/push_lilo.sh'])
+	subprocess.call(['sh', '/home/pi/code/scripts/push_lilo.sh'])
 	thread = Thread(target = LiloStatusLight)
 	thread.start()
 	app.run(debug=True, host=ip_address, port=PORT, use_reloader=False)
