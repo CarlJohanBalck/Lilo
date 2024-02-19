@@ -138,8 +138,17 @@ def LiloFick():
 	config['DEFAULT']['last_date'] = weekday + " " + date_time
 	with open('lastDate.ini', 'w') as configfile:
 		config.write(configfile)
-	subprocess.call(['sh', '/home/pi/code/scripts/push_lilo.sh'])
-	sense.set_pixels(smiley_face)
+	# subprocess.call(['sh', '/home/pi/code/scripts/push_lilo.sh'])
+	# sense.set_pixels(smiley_face)
+
+	process = subprocess.Popen(['sh', '/home/pi/code/scripts/push_lilo.sh'])
+
+	# Check if the subprocess has finished
+	if process.poll() is None:
+		print("Subprocess is still running.")
+	else:
+		print("Subprocess has finished.")
+		sense.set_pixels(smiley_face)
 
 
 if __name__ == '__main__':
