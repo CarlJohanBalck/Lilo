@@ -31,16 +31,6 @@ print(' IP address of Pi: ' + ip_address)
 
 sense = SenseHat()
 
-def getEverySecondDateInFuture(date):
-	parsedDate = datetime.strptime(date, "%d/%m/%Y").date()
-	dateList = []
-	for i in range (20):
-		td = timedelta(days=i+2)
-		futureDate = parsedDate + td
-		futureMedicationDates = futureDate.strftime("%d/%m/%Y")	
-		dateList.append(futureMedicationDates)
-	everyOtherDateList = dateList[::2]
-	return everyOtherDateList
 
 def received_water(event):
 	if event.action == 'pressed':
