@@ -10,6 +10,8 @@ b = (0,0,255)
 
 r = (255,0,0)
 
+o = (255,165,0)
+
 smiley_face = [
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
@@ -18,6 +20,28 @@ smiley_face = [
    y, y, y, y, y, y, y, y,
    y, b, b, y, y, b, b, y,
    y, y, y, b, b, y, y, y,
+   y, y, y, y, y, y, y, y
+]
+
+got_water = [
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, b, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y
+]
+
+needs_water = [
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, o, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y
 ]
 
