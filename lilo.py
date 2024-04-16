@@ -34,8 +34,6 @@ ip_address = IP_ADDRESS
 app = Flask(__name__)
 CORS(app)
 
-print('\n Hostname of your Pi: ' + hostname)
-print(' IP address of Pi: ' + ip_address)
 
 sense = SenseHat()
 
