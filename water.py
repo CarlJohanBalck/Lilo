@@ -18,8 +18,22 @@ from config import (
 	IP_ADDRESS,
 	PORT,
 	needs_water,
-	got_water
+	got_water,
+	running,
+	swimming,
+	gym
 )
+
+
+monday = 0
+tuesday = 1
+wednesday = 2
+thursday = 3
+friday = 4
+saturday = 5
+sunday = 6
+hasTrained = False
+
 
 hostname = socket.gethostname()
 ip_address = IP_ADDRESS
@@ -35,6 +49,11 @@ sense = SenseHat()
 def received_water(event):
 	if event.action == 'pressed':
 		LiloFick()
+
+def received_training(event):
+	if event.action == 'pressed':
+		global hasTrained
+		hasTrained = True
 		
 def LiloWaterLight():
 	config = configparser.ConfigParser()
@@ -44,6 +63,7 @@ def LiloWaterLight():
 
 	while True:
 		sense.stick.direction_middle = received_water
+		sense.stick.direction_right = received_training
 		try:
 			config = configparser.ConfigParser()
 			config.read('lastDate_water.ini')
@@ -56,15 +76,20 @@ def LiloWaterLight():
 			b = datetime.strptime(lastDate, date_format)
 			delta = a - b
 			sense.set_rotation(180)
-			
-
 			number = 0
-			
 			if(delta.days > 0):
 				number = needs_water
 			else:
 				number = got_water
-			
+				if(now.weekday() == monday and (not hasTrained)):
+					number = gym
+				if(now.weekday() == tuesday and (not hasTrained)):
+					number = running
+				if(now.weekday() == thursday and (not hasTrained)):
+					number = swimming
+				else:
+					number = got_water
+
 			sense.set_pixels(number)
 		except AttributeError:
 			time.sleep(2)

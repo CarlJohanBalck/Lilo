@@ -1,4 +1,4 @@
-IP_ADDRESS = "192.168.0.120"
+IP_ADDRESS = "192.168.0.100"
 PORT = 5001
 PORT_BE = 5002
 g = (0, 255, 0)
@@ -26,7 +26,7 @@ smiley_face = [
 got_water = [
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
-   y, b, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
@@ -38,6 +38,37 @@ needs_water = [
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
    y, o, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y
+]
+gym = [
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, g, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y
+]
+swimming = [
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, b, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y
+]
+
+running = [
+   y, y, y, y, y, y, y, y,
+   y, y, y, y, y, y, y, y,
+   y, r, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
    y, y, y, y, y, y, y, y,
