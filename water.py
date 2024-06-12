@@ -68,26 +68,32 @@ def LiloWaterLight():
 			config = configparser.ConfigParser()
 			config.read('lastDate_water.ini')
 			lastDate = config['DEFAULT']['last_water'].split(' ', 1)[1]
+			lastDate_training = config['DEFAULT']['last_training'].split(' ', 1)[1]
 			now = datetime.now() # current date and time	
 			date_time = now.strftime("%d/%m/%Y")
 			
 			date_format = "%d/%m/%Y"
 			a = datetime.strptime(date_time, date_format)
 			b = datetime.strptime(lastDate, date_format)
+			b_training = datetime.strptime(lastDate_training, date_format)
 			delta = a - b
+			delta_training = a - b_training
 			sense.set_rotation(180)
 			number = 0
+			print("DELTA_TRAINING", delta_training)
 			if(delta.days > 0):
 				number = needs_water
 			else:
-				number = got_water
-				if(now.weekday() == monday and (not hasTrained)):
+				if(now.weekday() == monday and (delta_training > 0)):
 					number = gym
-				if(now.weekday() == tuesday and (not hasTrained)):
+				if(now.weekday() == tuesday and (delta_training > 0)):
+					print("SETS TUESDAY")
 					number = running
-				if(now.weekday() == thursday and (not hasTrained)):
+					
+				if(now.weekday() == thursday and (delta_training > 0)):
 					number = swimming
 				else:
+					print("FALLBACK")
 					number = got_water
 
 			sense.set_pixels(number)
